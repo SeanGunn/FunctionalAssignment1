@@ -1,6 +1,6 @@
 (ns assignment1fp.core)
 
-
+;;;;;;;;;;;;;;;;;start of q1
 (def q1
   ;;defining a seq to use
   lista ["a" "b" "c" "d"]
@@ -45,22 +45,40 @@
 (defn exp [x n]
   ;;for every value passed through it times them together (reduce times every value in list) (repeat returns lazy seq of values)
   (reduce * (repeat n x)))
+;;;;;;;;;;;;end of q1
 
-(def change
-  (loop [currentLeft v]
-    (if (= 0 currentLeft)
-      v
-      (if (> ))))
-
+;;question 2
+(defn makeChange? [currentCoinType changeLeft]
+  (if (> (/ changeLeft (convertCoin currentCoinType)) 0)
+    (do
+      true)
+    (do
+      false)
+    )
   )
 
+(defn coin-changer
+  [changeLeft currentCoinType coinTypeAndQuantity]
+  (if (> changeLeft 0)
+    (if (makeChange? currentCoinType changeLeft)
+      (coin-changer
+        (- change-left (currentCoinType coinTypeAndQuantity))
+        currentCoinType
+        (assoc
+          coinTypeAndQuantity
+          currentCoinType
+          (inc (currentCoinType coinTypeAndQuantity)))))))
+
+(defn convertCoin [c]
+(cond
+  (= :dollar c) 100
+  (= :halfDollars c) 50
+  (= :quarter c) 25
+  (= :dime c) 10
+  (= :nickel c) 5
+  (= :penny c) 1
+)
 
 
-(defn conmoney [m]
-  (cond
-    (= \D m) 10                                             ;;dimes
-    (= \Q m) 25                                             ;;quarters
-    (= \N m) 5                                              ;;nickels
-    (= \P m) 1                                              ;;pennies
-    (= \R m) 100                                            ;;dollar
-    (= \H m) 50))                                           ;;half dollar
+(coin-changer 100 :quarter {:dollar 0 :halfDollars 0 :quarter 0 :dime 0 :nickel 0 :penny 0})
+(coin-changer 100 :quarter {:dollar 0 :halfDollars 0 :quarter 0 :dime 0 :nickel 0 :penny 0})
