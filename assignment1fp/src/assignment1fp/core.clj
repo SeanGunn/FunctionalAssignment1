@@ -108,20 +108,96 @@
 (Q2 100 :quarter {:dollar 0 :halfDollars 0 :quarter 0 :dime 0 :nickel 0 :penny 0} 6)
 
 (defn Q4
-(let nasa (slurp "https://data.nasa.gov/resource/y77d-th95.json"))
+  ((let nasa (slurp "https://data.nasa.gov/resource/y77d-th95.json"))
+   (yearMostMeterFalls nasa))
 
   )
-(defn yearMostMeterFalls [data]
-  ([([data n]
-     (let answer
-      (let size (count data))
-     (if (= n size)
-       ;;if n is the same as size it returns the overall answer
 
-       (println answer)
-       )
-      (nth n )
-      )
-     (recur data (inc n))
-      )])
+(defn yearMostMeterFalls [data]
+  ;;defining the values to compare
+  ((let yearMostCurrent (= 0))
+   (let yearMostPossiable)
+  (let amountCurrentMost (= 0))
+   (let amountCurrentPoss (= 0))
+   (let numberInList)
+   ;;creating the tail recursion
+      (defn yearFallsTail [n ] (
+                                ;;if it has a fell as a value in the n th part of the data it will enter the if
+      (if (= (nth n data (:fall)) "Fell")
+        ;;if never set a value for year it will set one as base
+        ((if (zero? yearMostCurrent)
+           ;;setting year most current as nth data year
+           ( yearMostCurrent (= (nth n data (:year))))
+           ;;increasing amount
+                                    (inc amountCurrentMost)
+           ;;setting the refinder as n
+                                    (nInList (= n)))
+         )
+        ;;if yearMost possible is greater than yearMostCurrent its gonna set the values to it
+        (if (< yearMostCurrent yearMostPossiable)
+           (= yearMostCurrent yearMostPossiable)
+           (inc amountCurrentPossiable)
+           (numberInList (= n)))
+        ;;if it falls in year same as yearMostCurrent increase its counter
+        (if (= (nth n data (:year)) yearMostCurrent)
+          (inc yearMostCurrent)
+          )
+        ;;if it falls in year same as yearMostPossiable increase its counter
+        (if (= (nth n data (:year)) yearMostPossiable)
+          (inc yearMostPossiable)
+          ))
+                                ;;if n is the same size as the data size the call yearMostMeterFallsFinal
+                                (if (= n (count data))
+                    (yearMostMeterFallsFinal numberInList data)))
+        (recur (inc n)))))
+
+(defn yearMostMeterFallsFinal [numberInList data]
+  ;;just prints out the year with most meterfalls
+  (print "year with most MeterFalls was " (nth numberInlist data (:year)))
+  )
+
+(defn yearHeaviestMeterFall [data]
+  ;;defining the values to compare
+  ((let yearMostCurrent (= 0))
+   (let yearMostPossiable)
+   (let amountCurrentMost (= 0))
+   (let amountCurrentPoss (= 0))
+   (let numberInList)
+   (let howHeavy1 (= 0))
+   (let howHeavy2 (= 0))
+   ;;creating the tail recursion
+   (defn yearHeaviestTail [n ] (
+                                ;;if it has a fell as a value in the n th part of the data it will enter the if
+                             (if (= (nth n data (:fall)) "Fell")
+                               ;;if never set a value for year it will set one as base
+                               ((if (zero? yearMostCurrent)
+                                  ( yearMostCurrent (= (nth n data (:year))))
+                                  (inc amountCurrentMost)
+                                  (nInList (= 0))
+                                  (howHeavy1 (= (+ (howHeavy1 (nth n data (:mass)))))))
+                                )
+                               ;;if yearMostPossible is greater than yearMostCurrent its gonna set the values to it and where to find it later
+                               (if (< yearMostCurrent yearMostPossiable)
+                                 (= yearMostCurrent yearMostPossiable)
+                                 (inc amountCurrentPossiable)
+                                 (numberInList (= n))
+                                 (howHeavy1 (= howHeavy2)))))
+  ;;if it falls in year same as yearMostCurrent increase its counter and increases its mass
+                               (if (= (nth n data (:year)) yearMostCurrent)
+                                 (inc yearMostCurrent)
+                                 (howHeavy1 (= (+ (howHeavy1 (nth n data (:mass)))))))
+                                 )
+;;if it falls in year same as yearMostPossiable increase its counter and increases its mass
+                               (if (= (nth n data (:year)) yearMostPossiable)
+                                 (inc yearMostPossiable)
+                                 (howHeavy2 (= (+ (howHeavy2 (nth n data (:mass)))))))
+;;if n is same size as the data size then calls yearHeaviestMeterFallFinal to display the answer
+                                (if (= n (count data))
+                                  (yearHeaviestMeterFallFinal numberInList data howHeavy1))
+     (recur (inc n))))
+
+(defn yearHeaviestMeterFallFinal [numberInList data mass]
+  ;;prints out the year with the heaviest collective meteor fall
+  (print "year with the heaviest MeterFalls was " (nth numberInlist data (:year)))
+  (print "with a mass of "mass)
   )
