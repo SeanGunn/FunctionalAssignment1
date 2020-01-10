@@ -1,5 +1,5 @@
 (ns assignment1fp.core)
-
+;;ps could not test any of the code since intellj would crash if I tried to run anything (so not expecting any to be right)
 ;;;;;;;;;;;;;;;;;start of q1
 (def q1
 
@@ -107,6 +107,7 @@
 (Q2 100 :quarter {:dollar 0 :halfDollars 0 :quarter 0 :dime 0 :nickel 0 :penny 0} 6)
 (Q2 100 :quarter {:dollar 0 :halfDollars 0 :quarter 0 :dime 0 :nickel 0 :penny 0} 6)
 
+;;;;;;;;q4
 (defn Q4
   ((let nasa (slurp "https://data.nasa.gov/resource/y77d-th95.json"))
    (yearMostMeterFalls nasa))
@@ -152,17 +153,17 @@
         (recur (inc n)))))
 
 (defn yearMostMeterFalls [data]
-((let year (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
-  (let amount (count (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
-              (let year (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
-              (yearMostMeterFallsAnswer (amount year ))))
+  ;;using regex to filter through the code and get a value that has the frequencies
+((let amount (sort (count (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))))
+ ;;calling the function to print out the top sorted answer
+ (yearMostMeterFallsAnswer (first amount))
   )
 
 
 
-  (defn yearMostMeterFallsAnswer [year n]
+  (defn yearMostMeterFallsAnswer [year]
   ;;just prints out the year with most meterfalls
-  (print "year with most MeterFalls was " year " with "n)
+  (print "year with most MeterFalls was " year )
   )
 
 (defn yearHeaviestMeterFall [data]
