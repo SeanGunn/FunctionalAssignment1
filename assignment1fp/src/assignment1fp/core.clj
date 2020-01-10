@@ -151,9 +151,18 @@
                     (yearMostMeterFallsFinal numberInList data)))
         (recur (inc n)))))
 
-(defn yearMostMeterFallsFinal [numberInList data]
+(defn yearMostMeterFalls [data]
+((let year (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
+  (let amount (count (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
+              (let year (frequencies (filter #("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) ))
+              (yearMostMeterFallsAnswer (amount year ))))
+  )
+
+
+
+  (defn yearMostMeterFallsAnswer [year n]
   ;;just prints out the year with most meterfalls
-  (print "year with most MeterFalls was " (nth numberInlist data (:year)))
+  (print "year with most MeterFalls was " year " with "n)
   )
 
 (defn yearHeaviestMeterFall [data]
