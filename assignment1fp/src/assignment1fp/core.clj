@@ -5,28 +5,43 @@
 
   ;;creating the recursive list function
   (defn recur-list [listName]
-    ;; turning vector into sequences
-    (let list (conj listName(seq [])0)
-              ;;creating the recursion
-              (letfn [(sqlistsearch
-                        [current next sizeleft]
-                        ;;if size left not zero current =  next of list
-                        (if (zero? sizeleft)
-                          current
-                          ;;setting list value to square and also calling exp function
-                          (into list (exp (current current) ))
-                          ;;set next as current list nth + 1
-                          next (+ nth listName(current) 1)
-                          ;;finishing tail recursion by using current and next and then deceasing sizeleft by 1
-                          (recur next current (dec sizeleft))))]
-                ;;calling sqlistsearch function
-                (sqlistsearch 0 1 (count listName)))
-              ;;printing final value
-              (println list))
+  (let aph ["q" "w" "e" "r" "t" "y" "u" "i" "o" "p" "a" "s" "d" "f" "g" "h" "j" "k" "l" "z" "x" "c" "v" "b" "n" "m" "," "." "/"  "]" ]
+           (if (in? aph (clojure.string/lower-case listName))
+             (do
+               (print "list contains letters."))
+             (do
+               ;; turning vector into sequences
+               (let list (conj listName(seq [])0)
+                         ;;creating the recursion
+                         (letfn [(sqlistsearch
+                                   [current next sizeleft]
+                                   ;;if size left not zero current =  next of list
+                                   (if (zero? sizeleft)
+                                     current
+                                     ;;setting list value to square and also calling exp function
+                                     (into list (exp (current current) ))
+                                     ;;set next as current list nth + 1
+                                     next (+ nth listName(current) 1)
+                                     ;;finishing tail recursion by using current and next and then deceasing sizeleft by 1
+                                     (recur next current (dec sizeleft))))]
+                           ;;calling sqlistsearch function
+                           (sqlistsearch 0 1 (count listName)))
+                         ;;printing final value
+                         (println list)))))
+
+
     )
   (defn exp [x n]
     ;;for every value passed through it times them together (reduce times every value in list) (repeat returns lazy seq of values)
     (reduce * (repeat n x)))
+  ;;checks to see if value ("a" "b" "C") is in vector
+  (defn in?
+    "true if coll contains elm"
+    [coll elmC]
+    ;;returns a true if any value is one of the elements from the collection passed through
+    ;;does this for every value in the elements collection to see if its contained in any slot
+    ((some #(repeat(= elmC %))coll)))
+
 
   ;;defining a seq to use
   ;;calling the recursive list function
